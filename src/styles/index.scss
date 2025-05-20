@@ -9,6 +9,7 @@ body {
 }
 
 .calendar__field {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -48,9 +49,31 @@ $start-days: (
 );
 
 @each $day, $margin in $start-days {
-  .calendar--start-#{$day} {
+  .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       margin-left: $margin;
     }
   }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar--month-length-31 {
+  .calendar__day {
+    display: flex;
+  }
+}
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  cursor: pointer;
+  transform: translateY(-20px);
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 }
